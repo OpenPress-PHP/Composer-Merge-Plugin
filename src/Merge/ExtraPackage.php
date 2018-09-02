@@ -85,7 +85,7 @@ class ExtraPackage
 
     public function isEnabled()
     {
-        return $this->json['extra']['enabled'];
+        return $this->json['extra']['openpress']['enabled'];
     }
 
     /**
