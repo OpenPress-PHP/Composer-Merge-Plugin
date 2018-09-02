@@ -1,7 +1,3 @@
-[![Latest Stable Version]](https://packagist.org/packages/wikimedia/composer-merge-plugin) [![License]](https://github.com/wikimedia/composer-merge-plugin/blob/master/LICENSE)
-[![Build Status]](https://travis-ci.org/wikimedia/composer-merge-plugin)
-[![Code Coverage]](https://scrutinizer-ci.com/g/wikimedia/composer-merge-plugin/?branch=master)
-
 Composer Merge Plugin
 =====================
 
@@ -24,13 +20,7 @@ extensions which may be managed via Composer.
 Installation
 ------------
 
-Composer Merge Plugin requires [Composer 1.0.0](https://getcomposer.org/) or
-newer.
-
-```
-$ composer require wikimedia/composer-merge-plugin
-```
-
+This Composer Plugin has been adapted from the forked version above and is not meant to be used outside of the OpenPress framework.
 
 Usage
 -----
