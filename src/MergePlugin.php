@@ -14,7 +14,6 @@ use Composer\Factory;
 use Composer\Composer;
 use Composer\Installer;
 use Composer\IO\IOInterface;
-use OpenPress\Plugin\Loader;
 use Composer\Script\ScriptEvents;
 use Composer\Installer\PackageEvent;
 use Composer\Plugin\PluginInterface;
@@ -253,8 +252,9 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
 
         $package = new ExtraPackage($path, $this->composer, $this->logger);
 
-        if (!Loader::isPluginActiveComposer($package)) {
+        if (!$package->isEnabled()) {
             $this->logger->info("Skipping <comment>{$path}</comment> due to the plugin not active...");
+            return;
         }
 
         if (isset($this->loadedNoDev[$path])) {

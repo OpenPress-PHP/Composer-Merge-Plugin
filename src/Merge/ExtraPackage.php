@@ -83,6 +83,11 @@ class ExtraPackage
         return $this->json['name'] . "@" . $this->json['version'];
     }
 
+    public function isEnabled()
+    {
+        return $this->json['extra']['enabled'];
+    }
+
     /**
      * Get list of additional packages to include if precessing recursively.
      *
