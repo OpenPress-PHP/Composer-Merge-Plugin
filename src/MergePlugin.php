@@ -2,33 +2,33 @@
 /**
  * This file is part of the Composer Merge plugin.
  *
- * Copyright (C) 2015 Bryan Davis, Wikimedia Foundation, and contributors
+ * Copyright (C) 2015 Bryan Davis, OpenPress Foundation, and contributors
  *
  * This software may be modified and distributed under the terms of the MIT
  * license. See the LICENSE file for details.
  */
 
-namespace Wikimedia\Composer;
+namespace OpenPress\Composer;
 
-use Wikimedia\Composer\Merge\ExtraPackage;
-use Wikimedia\Composer\Merge\MissingFileException;
-use Wikimedia\Composer\Merge\PluginState;
-
-use Composer\Composer;
-use Composer\DependencyResolver\Operation\InstallOperation;
-use Composer\EventDispatcher\Event as BaseEvent;
-use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Factory;
+use Composer\Composer;
 use Composer\Installer;
+use Composer\IO\IOInterface;
+use OpenPress\Plugin\Loader;
+use Composer\Script\ScriptEvents;
+use Composer\Installer\PackageEvent;
+use Composer\Plugin\PluginInterface;
+use Composer\Installer\PackageEvents;
 use Composer\Installer\InstallerEvent;
 use Composer\Installer\InstallerEvents;
-use Composer\Installer\PackageEvent;
-use Composer\Installer\PackageEvents;
-use Composer\IO\IOInterface;
-use Composer\Package\RootPackageInterface;
-use Composer\Plugin\PluginInterface;
 use Composer\Script\Event as ScriptEvent;
-use Composer\Script\ScriptEvents;
+use OpenPress\Composer\Merge\PluginState;
+use Composer\Package\RootPackageInterface;
+use OpenPress\Composer\Merge\ExtraPackage;
+use Composer\EventDispatcher\Event as BaseEvent;
+use OpenPress\Composer\Merge\MissingFileException;
+use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\DependencyResolver\Operation\InstallOperation;
 
 /**
  * Composer plugin that allows merging multiple composer.json files.
@@ -85,7 +85,7 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
     /**
      * Offical package name
      */
-    const PACKAGE_NAME = 'wikimedia/composer-merge-plugin';
+    const PACKAGE_NAME = 'openpress/composer-merge';
 
     /**
      * Name of the composer 1.1 init event.
@@ -252,6 +252,10 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
         }
 
         $package = new ExtraPackage($path, $this->composer, $this->logger);
+
+        if (!Loader::isPluginActiveComposer($package)) {
+            $this->logger->info("Skipping <comment>{$path}</comment> due to the plugin not active...");
+        }
 
         if (isset($this->loadedNoDev[$path])) {
             $this->logger->info(
