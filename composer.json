@@ -1,5 +1,5 @@
 {
-    "name": "wikimedia/composer-merge-plugin",
+    "name": "openpress/composer-merge",
     "description": "Composer plugin to merge multiple composer.json files",
     "type": "composer-plugin",
     "license": "MIT",
@@ -7,6 +7,10 @@
         {
             "name": "Bryan Davis",
             "email": "bd808@wikimedia.org"
+        },
+        {
+            "name": "Dominic Carrington",
+            "email": "carringtondominic@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -23,14 +27,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Wikimedia\\Composer\\": "src/"
+            "OpenPress\\Composer\\": "src/"
         }
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.3.x-dev"
         },
-        "class": "Wikimedia\\Composer\\MergePlugin"
+        "class": "OpenPress\\Composer\\MergePlugin"
     },
     "config": {
         "optimize-autoloader": true
