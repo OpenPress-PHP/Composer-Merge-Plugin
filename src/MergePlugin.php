@@ -125,6 +125,8 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
      */
     protected $loadedNoDev = array();
 
+    protected $enabled;
+
     /**
      * {@inheritdoc}
      */
@@ -133,6 +135,7 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
         $this->composer = $composer;
         $this->state = new PluginState($this->composer);
         $this->logger = new Logger('merge-plugin', $io);
+        $this->enabled = json_decode(file_get_contents($composer->getConfig()->get('vendor-dir') . "/../app/enabled.json"), true);
     }
 
     /**
@@ -252,7 +255,8 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
 
         $package = new ExtraPackage($path, $this->composer, $this->logger);
 
-        if (!$package->isEnabled()) {
+        if (!in_array($package->getName(), $this->enabled["plugins"])) {
+            // if (!$package->isEnabled()) {
             $this->logger->info("Skipping <comment>{$path}</comment> due to the plugin not active...");
             return;
         }

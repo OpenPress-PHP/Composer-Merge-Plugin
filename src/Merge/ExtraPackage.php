@@ -83,11 +83,6 @@ class ExtraPackage
         return $this->json['name'] . "@" . $this->json['version'];
     }
 
-    public function isEnabled()
-    {
-        return isset($this->json['extra']['openpress']['enabled']) ? $this->json['extra']['openpress']['enabled'] : false;
-    }
-
     /**
      * Get list of additional packages to include if precessing recursively.
      *
