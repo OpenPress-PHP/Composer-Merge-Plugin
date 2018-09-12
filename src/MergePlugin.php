@@ -135,8 +135,8 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
         $this->composer = $composer;
         $this->state = new PluginState($this->composer);
         $this->logger = new Logger('merge-plugin', $io);
-        die($composer->getConfig()->get('vendor-dir') . "/../app/enabled.json");
         $this->enabled = json_decode(file_get_contents($composer->getConfig()->get('vendor-dir') . "/../app/enabled.json"), true);
+        die(var_dump($this->enabled));
     }
 
     /**
