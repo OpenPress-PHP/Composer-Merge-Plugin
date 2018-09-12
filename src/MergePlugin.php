@@ -136,7 +136,6 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
         $this->state = new PluginState($this->composer);
         $this->logger = new Logger('merge-plugin', $io);
         $this->enabled = json_decode(file_get_contents($composer->getConfig()->get('vendor-dir') . "/../app/enabled.json"), true);
-        die(var_dump($this->enabled));
     }
 
     /**
@@ -256,6 +255,7 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
 
         $package = new ExtraPackage($path, $this->composer, $this->logger);
 
+        echo $package->getName();
         if (!in_array($package->getName(), $this->enabled["plugins"])) {
             // if (!$package->isEnabled()) {
             $this->logger->info("Skipping <comment>{$path}</comment> due to the plugin not active...");
