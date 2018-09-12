@@ -255,8 +255,8 @@ class MergePlugin implements PluginInterface, EventSubscriberInterface
 
         $package = new ExtraPackage($path, $this->composer, $this->logger);
 
-        echo $package->getName();
-        if (!in_array($package->getName(), $this->enabled["plugins"])) {
+        $packageName = $package->getName();
+        if (!in_array(substr($packageName, 0, \strpos($packageName, "@")), $this->enabled["plugins"])) {
             // if (!$package->isEnabled()) {
             $this->logger->info("Skipping <comment>{$path}</comment> due to the plugin not active...");
             return;
